@@ -1,0 +1,36 @@
+<div class="product-container">
+  <div class="product-content">
+    <!-- Imagine -->
+    <div class="product-image-container">
+      <img loading="eager" [src]="product.imageUrl" [alt]="product.name" class="product-image">
+    </div>
+
+    <!-- Detalii -->
+    <div class="product-details">
+      <h1 class="product-title">{{ product.name }}</h1>
+      <p class="product-origin">Origine: <b>{{ product.origine }}</b></p>
+      <p class="product-quality">Calitate: <b>{{ product.calitatea }}</b></p>
+      <p [ngClass]="product.quantity > 0 ? 'stock-available' : 'stock-unavailable'">
+        {{ product.quantity > 0 ? 'În stoc' : 'Stoc epuizat' }}
+      </p>
+
+      <!-- Preț -->
+      <div *ngIf="(product.newPice ?? 0) > 0" class="price-container">
+        <p class="old-price">{{ product.price | number:'1.2-2' }} RON/{{ product.unit }}</p>
+        <p class="new-price">{{ product.newPice | number:'1.2-2' }} RON/{{ product.unit }}</p>
+      </div>
+      <div *ngIf="!product.newPice" class="price-container">
+        <p class="new-price">{{ product.price | number:'1.2-2' }} RON/{{ product.unit }}</p>
+      </div>
+
+      <!-- Buton Share -->
+      <button (click)="shareOnFacebook()" class="share-button">
+        <lucide-angular name="share-2" class="w-5 h-5 mr-2"></lucide-angular>
+        Share pe Facebook
+      </button>
+    </div>
+  </div>
+
+  <!-- JSON-LD -->
+  <div [innerHTML]="productJsonLd"></div>
+</div>

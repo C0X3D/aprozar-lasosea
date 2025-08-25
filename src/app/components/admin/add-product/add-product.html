@@ -1,0 +1,109 @@
+@if(!product){}
+@else{
+  <div class="add-form-wrapper">
+    <h2 class="form-title">➕ Adaugă produs nou</h2>
+
+    <form (ngSubmit)="save()" class="form-grid">
+
+      <!-- ✅ Coloana 1 -->
+      <div>
+        <!-- Imagine produs -->
+        <label>Imagine produs</label>
+
+        <!-- Placeholder image preview -->
+        <div class="image-preview cursor-pointer" (click)="openCamera()">
+          <ng-container *ngIf="previewUrl; else placeholder">
+            <img [src]="previewUrl" alt="Preview imagine" />
+          </ng-container>
+          <ng-template #placeholder>
+            <div class="placeholder-content">
+              <lucide-angular name="camera" class="camera" />
+              <p>Fă o poză</p>
+            </div>
+          </ng-template>
+        </div>
+
+        <!-- Buton selectare din galerie -->
+        <label for="fileInput" class="custom-file-button">📁 Selectează din galerie</label>
+        <input
+        id="fileInput"
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        capture="environment"
+        class="hidden"
+        />
+
+
+        <label>Cantitate</label>
+        <input type="number" [(ngModel)]="product.quantity" name="quantity" required />
+
+        <label>Calitate</label>
+        <select [(ngModel)]="product.calitatea" name="calitatea" required>
+          <option [value]="1">1</option>
+          <option [value]="2">2</option>
+          <option [value]="3">3</option>
+        </select>
+
+        <label>Unitate de măsură</label>
+        <select [(ngModel)]="product.unit" name="unit" required>
+          <option value="buc">Bucată</option>
+          <option value="kg">Kilogram</option>
+          <option value="g">Gram</option>
+          <option value="100g">100 grame</option>
+          <option value="l">Litru</option>
+          <option value="ml">Mililitru</option>
+          <option value="legătură">Legătură</option>
+          <option value="caserolă">Caserolă</option>
+          <option value="pachet">Pachet</option>
+          <option value="cutie">Cutie</option>
+        </select>
+
+        <label>Ordinea (pentru sortare)</label>
+        <input type="number" [(ngModel)]="product.order" name="order" />
+      </div>
+
+      <!-- ✅ Coloana 2 -->
+      <div>
+        <label>Nume</label>
+        <input [(ngModel)]="product.name" name="name" required />
+
+        <label>Tip</label>
+        <select [(ngModel)]="product.type" name="type">
+          <option *ngFor="let opt of sortTypes" [value]="opt.value">{{ opt.label }}</option>
+        </select>
+
+        <label>Preț (RON / unitate)</label>
+        <input type="number" [(ngModel)]="product.price" name="pricePerKg" required />
+
+        <label>Origine</label>
+        <input type="text" [(ngModel)]="product.origine" name="origine" required />
+
+        <label>Imagine URL (opțional)</label>
+        <input [(ngModel)]="product.imageUrl" name="imageUrl" placeholder="Link imagine dacă există" />
+
+        <label>Taguri (virgulă)</label>
+        <input [(ngModel)]="product.tags" name="tags" placeholder="ex: mar, dulce, bio" />
+
+        <label class="block mb-2 mt-4">Taguri rapide</label>
+
+        <div class="tag-list">
+          @for (tag of commonTags$ | async; track $index) {
+            <span
+            class="tag-badge"
+            [class.selected]="isTagSelected(tag)"
+            (click)="toggleTag(tag)">
+            {{ tag }}
+          </span>
+        }
+      </div>
+    </div>
+
+    <!-- ✅ Buton salvare -->
+    <div class="form-actions col-span-2">
+      <button type="submit">💾 Adaugă produsul</button>
+    </div>
+
+  </form>
+</div>
+}

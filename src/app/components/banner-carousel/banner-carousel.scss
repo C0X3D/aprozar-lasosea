@@ -1,0 +1,37 @@
+.carousel-container {
+  @apply relative w-full mt-2 mb-2;
+}
+
+.carousel-track {
+  @apply flex transition-transform duration-700 ease-in-out;
+}
+
+.carousel-slide {
+  @apply min-w-full flex flex-col md:flex-row items-center justify-between md:justify-around relative;
+}
+
+button {
+  @apply bg-black bg-opacity-50 text-white p-2 rounded-full transition hover:bg-opacity-75;
+}
+
+
+.reducere {
+  @apply absolute top-8 left-8 z-50; // Poziționare absolută în colțul dreapta sus
+  @apply bg-red-600 text-white rounded w-fit p-2;
+
+  .reducere-content {
+    @apply p-2 flex flex-col items-center w-fit;
+  }
+
+  .discount {
+    @apply text-xl font-bold;
+  }
+
+  .old-price {
+    @apply line-through text-sm opacity-80;
+  }
+
+  .new-price {
+    @apply text-2xl font-extrabold;
+  }
+}

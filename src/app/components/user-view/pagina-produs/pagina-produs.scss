@@ -1,0 +1,51 @@
+.product-container {
+  @apply max-w-4xl mx-auto p-4;
+}
+
+.product-content {
+  @apply flex flex-col md:flex-row gap-6 items-start;
+}
+
+.product-image-container {
+  @apply w-full md:w-1/2 flex justify-center items-center;
+}
+
+.product-image {
+  @apply rounded shadow max-h-[400px] object-contain;
+}
+
+.product-details {
+  @apply w-full md:w-1/2 space-y-2;
+}
+
+.product-title {
+  @apply text-2xl md:text-3xl font-bold text-gray-900 dark:text-white;
+}
+
+.product-origin, .product-quality {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.stock-available {
+  @apply text-green-600 font-semibold;
+}
+
+.stock-unavailable {
+  @apply text-red-600 font-semibold;
+}
+
+.price-container {
+  @apply space-y-1;
+}
+
+.old-price {
+  @apply line-through text-gray-500;
+}
+
+.new-price {
+  @apply text-2xl text-green-600 font-bold;
+}
+
+.share-button {
+  @apply inline-flex items-center bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition;
+}

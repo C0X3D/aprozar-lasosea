@@ -1,0 +1,104 @@
+/* Tailwind CSS Custom Styles */
+
+/* Top bar */
+
+
+/* Add button */
+.add-button {
+  @apply bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow;
+}
+
+/* Logout button */
+.logout-button {
+  @apply text-red-500 hover:text-red-600 font-medium;
+}
+
+/* Filter bar */
+.filter-bar {
+  @apply flex flex-wrap gap-4 items-center justify-center px-4 sm:px-8 mb-6;
+}
+
+/* Filter group */
+.filter-group {
+  @apply flex items-center gap-2;
+}
+
+/* Input fields */
+.filter-input, .filter-select {
+  @apply border rounded px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-green-500;
+}
+
+/* Catalog Grid */
+.catalog-grid {
+  @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-4 sm:px-8 mb-10;
+}
+
+/* Product Card */
+.product-card {
+  @apply bg-white rounded-lg shadow p-0 flex flex-col items-center text-center relative;
+}
+
+/* Product Image */
+.product-image {
+  @apply w-full h-60 object-cover rounded mb-3;
+}
+
+/* Product Title */
+.product-title {
+  @apply text-lg font-semibold;
+}
+
+/* Product Quality and Origin */
+.product-calitate {
+  @apply text-sm text-gray-600;
+}
+
+/* Stock Info */
+.stock-ok {
+  @apply text-green-600 font-semibold;
+}
+
+.stock-empty {
+  @apply text-red-500 font-semibold;
+}
+
+/* Discount section */
+.reducere {
+  @apply absolute top-2 right-2 bg-red-600 text-white rounded;
+  .reducere-content {
+    @apply p-2 flex flex-col items-center;
+  }
+  .discount {
+    @apply text-xl font-bold;
+  }
+  .old-price {
+    @apply line-through text-sm opacity-80;
+  }
+  .new-price {
+    @apply text-2xl font-extrabold;
+  }
+}
+
+/* SEO improvements for <a> tags */
+.product-link {
+  @apply block grow w-full no-underline focus:outline-none focus:ring-2 focus:ring-blue-500 hover:text-blue-700;
+}
+
+.product-link:focus, .product-link:hover {
+  @apply text-blue-500;
+}
+
+/* Ensure accessibility with visual cues */
+.product-image:focus, .product-title:focus {
+  @apply outline-none ring-2 ring-blue-500;
+}
+
+/* Adjustments for better focus visibility */
+.product-link, .product-title {
+  @apply focus:ring-2 focus:ring-green-500;
+}
+
+/* Social share button */
+.share-button {
+  @apply mt-6 bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded inline-flex items-center gap-2 text-sm;
+}

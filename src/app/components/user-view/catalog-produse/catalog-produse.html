@@ -1,0 +1,81 @@
+<!-- app.component.html -->
+
+<!-- Header Section -->
+
+
+
+
+<main>
+  <!-- Bara de filtrare -->
+  <section class="filter-bar">
+    <div class="filter-group">
+      <lucide-angular name="search" class="icon" />
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Caută..." class="filter-input" />
+    </div>
+
+    <div class="filter-group">
+      <lucide-angular name="list-filter" class="icon" />
+      <select [(ngModel)]="sortBy" class="filter-select">
+        <option value="name">Nume</option>
+        <option value="type">Tip</option>
+        <option value="price">Preț</option>
+        <option value="quantity">Cantitate</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <lucide-angular [name]="sortDir === 'asc' ? 'arrow-up' : 'arrow-down'" class="icon" />
+      <select [(ngModel)]="sortDir" class="filter-select">
+        <option value="asc">Crescător</option>
+        <option value="desc">Descrescător</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <lucide-angular name="list-filter" class="icon" />
+      <select [(ngModel)]="selectedType" class="filter-select">
+        <option *ngFor="let opt of sortTypes" [value]="opt.value">{{ opt.label }}</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Catalog de produse -->
+  <section class="catalog-grid">
+    <div *ngFor="let product of products | productFilter:searchTerm:sortBy:sortDir:selectedType" class="product-card">
+      <a [routerLink]="['/product', product.id]" class="product-link">
+        <img [src]="product.thumbnailUrl!" [alt]="product.name + ' - produs'" width="300" height="300" class="product-image" priority />
+        <h3 class="product-title">{{ product.name }}</h3>
+        <h2 class="product-calitate">Calitatea <b>{{ product.calitatea }}</b></h2>
+        <h2 class="product-calitate">Origine: <b>{{ product.origine }}</b></h2>
+
+        <p [ngClass]="product.quantity > 0 ? 'stock-ok' : 'stock-empty'">
+          {{ product.quantity > 0 ? 'În stoc' : 'Stoc epuizat' }}
+        </p>
+
+        <div *ngIf="(product.price ?? 0) > 0 && (product.newPice ?? 0) > 0" class="reducere">
+          <div class="reducere-content">
+            <div class="discount">
+              -{{ ((1 - ((product.newPice ?? 1) / product.price)) * 100) | number:'1.0-0' }}%
+            </div>
+            <div class="old-price">
+              {{ product.price | number:'1.2-2' }}
+            </div>
+            <div class="new-price">
+              {{ product.newPice | number:'1.2-2' }}
+            </div>
+            <small>RON/{{product.unit}}</small>
+          </div>
+        </div>
+
+        <div *ngIf="(product.price ?? 0) > 0 && (product.newPice ?? 0) <= 0" class="reducere">
+          <div class="reducere-content">
+            <div class="new-price">
+              {{ product.price | number:'1.2-2' }}
+            </div>
+            <small>RON/{{product.unit}}</small>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+</main>

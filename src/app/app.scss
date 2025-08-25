@@ -1,0 +1,11 @@
+.top-bar {
+  @apply flex flex-wrap justify-between items-center px-4 sm:px-8 py-4 bg-white shadow mb-0;
+}
+
+.logo-container {
+  @apply flex flex-col items-center justify-center flex-1 m-0;
+}
+
+.logo {
+  @apply h-24 object-contain mt-0;
+}

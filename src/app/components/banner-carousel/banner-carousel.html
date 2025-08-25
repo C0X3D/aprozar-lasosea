@@ -1,0 +1,80 @@
+<div *ngIf="banners().length > 0; else loading">
+
+
+<div class="carousel-container overflow-hidden relative w-full my-4"
+     (mouseenter)="stopAutoRotate()" (mouseleave)="startAutoRotate()">
+
+  <div class="carousel-track flex transition-transform duration-700 ease-in-out"
+       [style.transform]="'translateX(-' + currentIndex() * 100 + '%)'">
+
+    <div *ngFor="let banner of banners(); let i = index"
+         class="carousel-slide min-w-full flex flex-col md:flex-row relative"
+         [ngClass]="{'md:flex-row-reverse': i % 2 !== 0}"
+         [style.background]="banner.backgroundColor || '#ffffff'">
+
+      <!-- Imagine -->
+      <div class="relative w-fit h-full md:h-[300px] overflow-hidden">
+        <img *ngIf="banner.imageUrl"
+             [src]="banner.imageUrl"
+             [alt]="banner.title"
+             class="w-full h-full object-contain md:object-cover opacity-80">
+
+        <div class="reduse">
+          <!-- Cu reducere -->
+          <div *ngIf="(banner.oldPrice ?? 0) > 0 && (banner.price ?? 0) > 0" class="reducere">
+            <div class="reducere-content">
+              <div class="discount">
+                -{{ ((1 - ((banner.price ?? 1) / (banner.oldPrice ?? 1))) * 100) | number:'1.0-0' }}%
+              </div>
+              <div class="old-price">
+                {{ banner.oldPrice | number:'1.2-2' }}
+              </div>
+              <div class="new-price">
+                {{ banner.price | number:'1.2-2' }}
+              </div>
+              <small>RON/{{ banner.unit }}</small>
+            </div>
+          </div>
+
+          <!-- Fără reducere -->
+          <div *ngIf="banner.price && !banner.oldPrice" class="reducere">
+            <div class="reducere-content">
+              <div class="new-price">
+                {{ banner.price | number:'1.2-2' }}
+              </div>
+              <small>RON/{{ banner.unit }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="relative w-full md:w-2/5 p-6 md:p-8 text-center md:text-left z-10 bg-gray-900 opacity-85">
+        <h3 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white dark:text-white drop-shadow">
+          {{ banner.title }}
+        </h3>
+        <p class="text-sm md:text-lg text-gray-300 dark:text-gray-300 mt-2 drop-shadow">
+          {{ banner.description }}
+        </p>
+      </div>
+
+    </div> <!-- END carousel-slide -->
+  </div> <!-- END carousel-track -->
+
+  @if (banners.length > 0) {
+  <!-- Controls -->
+  <button (click)="prev()"
+          class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full">
+    <lucide-angular name="chevron-left" class="icon"></lucide-angular>
+  </button>
+  <button (click)="next()"
+          class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full">
+    <lucide-angular name="chevron-right" class="icon"></lucide-angular>
+  </button>
+  }
+</div> <!-- END carousel-container -->
+</div>
+<ng-template #loading>
+  <p>Loading banners...</p>
+</ng-template>
+
